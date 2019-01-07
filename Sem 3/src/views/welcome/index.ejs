@@ -1,0 +1,32 @@
+<%- contentFor('body') %>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 offset-md-3 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <h4 class="card-title">
+                                Welcome <%= user.username %>
+                            </h4>
+                            <form action="/users?_method=PUT" method="post">
+                                <div class="form-group">
+                                    <h5>Fill in about you:</h5>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control" placeholder="Name:">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" name="age" class="form-control" placeholder="Age:">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

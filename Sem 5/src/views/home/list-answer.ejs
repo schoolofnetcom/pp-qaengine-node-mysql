@@ -1,0 +1,70 @@
+<%- contentFor('body') %>
+<div class="row mt-5">
+    <aside class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                Ask a question
+            </div>
+            <div class="card-body">
+                <form action="/answers" method="post">
+                    <div class="form-group">
+                        <textarea name="question" id="question" cols="30" rows="5" class="form-control" placeholder="Ask your question here..."></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="switch"> 
+                                <input type="checkbox" name="is_annon" id="is_annon" />
+                                <label for="is_annon"></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <button type="submit" class="btn btn-secondary">Ask!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </aside>
+    <section class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+        <% answers.forEach(function(data) { %>
+            <div class="row mt-2 question-box">
+                <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card-body">
+                        <% if (data.is_annon) { %>
+                            <div class="profile row">
+                                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                                    <img src="https://www.highcountryconservation.org/wp-content/uploads/sites/16/2017/08/generic_image_missing-profile.jpg" class="img-fluid img-profile" alt="">                    
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 mt-2 name-info">
+                                    <a href="" class="">Annon</a>
+                                </div>         
+                            </div>
+                        <% } else { %>
+                            <div class="profile row">
+                                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                                    <img src="<%= data.questionUser.avatar %>" class="img-fluid img-profile" alt="">                    
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 mt-2 name-info">
+                                    <a href="/t/<%= data.questionUser.username %>" class=""><%= data.questionUser.name %></a>
+                                </div>         
+                            </div>
+                        <% } %>
+                        <blockquote class="blockquote">
+                            <p>
+                                <%= data.question %>
+                            </p>
+                            <form action="/answers/<%= data.id %>?_method=PUT" method="post">
+                                <div class="form-group">
+                                    <textarea name="answer" id="" rows="3" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Answer</button>
+                                </div>
+                            </form>
+                        </blockquote>
+                    </div>
+                </div>        
+            </div>        
+        <% }); %>       
+    </section>
+</div>
